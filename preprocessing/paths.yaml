@@ -1,14 +1,14 @@
 
-train_img_dir: '/Users/npow/code/kaggle-plankton/data/train/resized/'
+train_img_dir: '/home/ml/npow1/project/data/plankton-data/train/resized/'
 # the dir that contains folders like n01440764, n01443537, ...
 
-val_img_dir: '/Users/npow/code/kaggle-plankton/data/train/resized/'
+val_img_dir: '/home/ml/npow1/project/data/plankton-data/train/resized/'
 # the dir that contains ILSVRC2012_val_00000001~50000.JPEG
 
-tar_root_dir: '/Users/npow/scratch/'  # dir to store all the preprocessed files
-tar_train_dir: '/Users/npow/scratch/train_hkl/'  # dir to store training batches
-tar_val_dir: '/Users/npow/scratch/val_hkl/'  # dir to store validation batches
-misc_dir: '/Users/npow/scratch/misc/'  
+tar_root_dir: '/home/ml/npow1/scratch/'  # dir to store all the preprocessed files
+tar_train_dir: '/home/ml/npow1/scratch/train_hkl/'  # dir to store training batches
+tar_val_dir: '/home/ml/npow1/scratch/val_hkl/'  # dir to store validation batches
+misc_dir: '/home/ml/npow1/scratch/misc/'  
 # dir to store img_mean.npy, shuffled_train_filenames.npy, train.txt, val.txt 
 
 meta_clsloc_mat: '/mnt/data/datasets/lsvrc_2014/ILSVRC2014_devkit/data/meta_clsloc.mat'
@@ -16,5 +16,5 @@ val_label_file: '/mnt/data/datasets/lsvrc_2014/ILSVRC2014_devkit/data/ILSVRC2014
 # although from ILSVRC2014, these 2 files still work for ILSVRC2012
 
 # caffe style train and validation labels
-valtxt_filename: '/Users/scratch/misc/val.txt'
-traintxt_filename: '/Users/scratch/misc/train.txt'
+valtxt_filename: '/home/ml/npow1/scratch/misc/val.txt'
+traintxt_filename: '/home/ml/npow1/scratch/misc/train.txt'

@@ -11,7 +11,7 @@ import numpy as np
 import hickle as hkl
 
 
-def get_img(img_name, img_size=256, batch_size=256):
+def get_img(img_name, img_size=48, batch_size=256):
 
     target_shape = (img_size, img_size, 3)
     img = scipy.misc.imread(img_name)  # x*x*3
@@ -31,7 +31,7 @@ def get_img(img_name, img_size=256, batch_size=256):
     return img
 
 
-def save_batches(file_list, tar_dir, img_size=256, batch_size=256,
+def save_batches(file_list, tar_dir, img_size=48, batch_size=256,
                  flag_avg=False, num_sub_batch=1):
     '''
     num_sub_batch is for parallelling using multiple gpus, it should be
@@ -100,15 +100,15 @@ def save_batches(file_list, tar_dir, img_size=256, batch_size=256,
     return img_sum / batch_count if flag_avg else None
 
 
-def get_train_filenames(src_train_dir, misc_dir, seed=1):
+def get_train_filenames(src_train_dir, misc_dir, shuf_fname, seed=1):
 
-    if os.path.exists(os.path.join(misc_dir, 'shuffled_train_filenames.npy')):
-        return np.load(os.path.join(misc_dir, 'shuffled_train_filenames.npy'))
+    if os.path.exists(os.path.join(misc_dir, shuf_fname)):
+        return np.load(os.path.join(misc_dir, shuf_fname))
 
     if not os.path.exists(misc_dir):
         os.makedirs(misc_dir)
 
-    print 'shuffled_train_filenames not found, generating ...'
+    print '%s not found, generating ...' % shuf_fname
 
     subfolders = [name for name in os.listdir(src_train_dir)
                   if os.path.isdir(os.path.join(src_train_dir, name))]
@@ -121,7 +121,7 @@ def get_train_filenames(src_train_dir, misc_dir, seed=1):
 
     np.random.seed(seed)
     np.random.shuffle(train_filenames)
-    np.save(os.path.join(misc_dir, 'shuffled_train_filenames.npy'),
+    np.save(os.path.join(misc_dir, shuf_fname),
             train_filenames)
 
     return train_filenames
@@ -147,8 +147,8 @@ if __name__ == '__main__':
     else:
         NotImplementedError("gen_type (2nd argument of make_hkl.py) can only be full or toy")
 
-    train_filenames = get_train_filenames(train_img_dir, misc_dir)
-    val_filenames = np.asarray(sorted(glob.glob(val_img_dir + '/*JPEG')))
+    train_filenames = get_train_filenames(train_img_dir, misc_dir, shuf_fname='shuffled_train_filenames.npy')
+    val_filenames = get_train_filenames(train_img_dir, misc_dir, shuf_fname='shuffled_val_filenames.npy')
 
     img_size = 256
     batch_size = 256
