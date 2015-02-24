@@ -115,7 +115,7 @@ def get_train_filenames(src_train_dir, misc_dir, seed=1):
 
     train_filenames = []
     for subfolder in subfolders:
-        train_filenames += glob.glob(src_train_dir + subfolder + '/*JPEG')
+        train_filenames += glob.glob(src_train_dir + subfolder + '/*jpg')
 
     train_filenames = np.asarray(sorted(train_filenames))
 

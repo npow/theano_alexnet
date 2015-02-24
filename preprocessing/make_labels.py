@@ -81,7 +81,7 @@ def save_train_labels(misc_dir, train_label_name):
         lines = text_labels.readlines()
     for line in lines:
         filename, label = line.split()
-        filename = filename.split('/')[1]
+        filename = filename.split('/')[-1]
         label_dict[filename] = int(label)
 
     # save the label npy file according to the shuffled filenames

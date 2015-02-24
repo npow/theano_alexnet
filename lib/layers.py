@@ -242,7 +242,7 @@ class DropoutLayer(object):
         self.flag_on = T.shared(np.cast[theano.config.floatX](1.0))
         self.flag_off = 1.0 - self.flag_on
 
-        seed_this = DropoutLayer.seed_common.randint(0, sys.maxint)
+        seed_this = DropoutLayer.seed_common.randint(0, 4294967295)
         mask_rng = theano.tensor.shared_randomstreams.RandomStreams(seed_this)
         self.mask = mask_rng.binomial(n=1, p=self.prob_keep, size=input.shape)
 
